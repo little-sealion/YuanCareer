@@ -3,23 +3,21 @@ Step 1: Break The UI Into A Component Hierarchy
     · Header
     - "Contact List"
 
-    · Content
+    · Search Bar
+    - input form
+    - search the ContactItem by ContactItemContent
+    - background-color change by on-click
 
-        · Search Bar
-        - input form
-        - search the ContactItem by ContactItemContent
-        - background-color change by on-click
-
-        · Add contact
-        - Button with " ADD "
-        - router/link to contactCard
+    · Add contact
+    - Button with " ADD "
+    - router/link to contactCard      
+    
+    · ContactList
+    - randering all list of ContactItems
 
             · ContactCard
             - call ContactCard component
             - write an add button
-       
-    · ContactList
-    - randering all list of ContactItems
 
         · ContactItem
         - Present a contact info with delete and edit function
