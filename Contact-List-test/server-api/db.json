@@ -1,0 +1,16 @@
+{
+    "contact": [
+        {
+            "id":"3004dcdc-2274-44f4-84d4-1829d82c7a95",
+            "name":"Nicole",
+            "mobile":"0452235235","email":"nicole@gmail.com"
+        },
+
+       {
+            "id":"340b3595-256e-4dae-8167-3f521201d893",
+            "name":"alex",
+            "mobile":"0452235235",
+            "email":"alex@gmail.com"
+        }
+    ]
+}
