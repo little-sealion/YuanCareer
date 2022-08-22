@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import ContactCard from '../ContactCard/ContactCard';
+import ContactCard from './components/ContactCard/ContactCard';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const ContactList = (props) => {
   console.log(props);
@@ -8,15 +9,6 @@ const ContactList = (props) => {
   const deleteContactHandler= (id) => {
      props.getContactId(id);
   }
-
-  // const contacts = [
-  //   {
-  //     id: "1",
-  //     name: "Dipesh",
-  //     mobile: "0452321523",
-  //     email: "dipesh@gmail.com"
-  //   },
-  // ];
 
   const renderContactList = props.contacts.map((contact) => {
      return ( 
@@ -28,10 +20,6 @@ const ContactList = (props) => {
       );
   });
 
-  const setSearchTerm = () => {
-    
-  }
-
   return (
     <div class="main"> 
     <h2>
@@ -40,20 +28,7 @@ const ContactList = (props) => {
         <button class="ui button teal right  ">Add Contact</button>
       </Link>
     </h2>
-    <div className="ui search"> 
-      <div class="ui icon input">
-        <input 
-          type="text" 
-          placeholder="Search..."/>
-        <i 
-          aria-hidden="true" 
-          className="search circular link icon"
-          value={props.term}
-          onChange={(e) => setSearchTerm( e.target.value )}
-          >  
-        </i>
-      </div>
-     </div>
+    <SearchBar />
       <div className="ui celled list">
           {renderContactList}
         </div>

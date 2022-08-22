@@ -6,7 +6,6 @@ import api from '../src/api/contacts';
 import Header from './components/Header';
 import AddContact from './components/AddContact/AddContact'
 import ContactList from './components/ContactList';
-import SearchBar from './components/SearchBar'
 
 import styled from 'styled-components';
 import './App.css';
@@ -113,7 +112,7 @@ useEffect(() => {
                 element={
                 <ContactList 
                   contacts={contacts} getContactId={removeContactHandler}
-                  term={searchItem}
+                  term={searchTerm}
                   searchKeyword = {searchHandler}
                 />
                } 
@@ -123,11 +122,11 @@ useEffect(() => {
                 element={
                 <AddContact addContactHandler={addContactHandler}/>
               }/>
-              {/* <Route 
+              <Route 
                 path="/edit" 
                 element={
                 <EditContact updateContactHandler={updateContactHandler}/>
-              }/> */}
+              }/>
 
           </Routes>
         </BrowserRouter>

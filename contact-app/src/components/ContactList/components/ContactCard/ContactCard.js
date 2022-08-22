@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import user from '../../images/user.png';
+import user from '../../../../images/user.png';
 
 
 const Icon = styled.div`
