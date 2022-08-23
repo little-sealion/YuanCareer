@@ -6,10 +6,11 @@ import api from '../src/api/contacts';
 import Header from './components/Header';
 import AddContact from './components/AddContact/AddContact'
 import ContactList from './components/ContactList';
+import EditContact from './components/EditContact/EditContact';
 
 import styled from 'styled-components';
 import './App.css';
-import EditContact from './components/EditContact/EditContact';
+
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -40,24 +41,26 @@ const retriveContacts = async() => {
 
 //AddContact
 const addContactHandler = async (contact) => {
-    console.log(contact);
     const request= {
       id: uuid(),
       ...contact,
     }
  
   const response = await api.post("/contacts", request)
-  console.log(response);
+
   setContacts([...contacts, response.data]);
 };
 
-//EditContact
+//Edit and update Contact
 const updateContactHandler = async (contact) => {
   const response = await api.put(`/contacts/${contact.id}`, contact)
   const { id } = response.data;
+
+  console.log(response);
+
   setContacts(
     contacts.map((contact) => {
-      return contact.id === id? {...response.data} : contact;
+      return contact.id !== id? {...response.data} : contact;
     })
   );
 };
@@ -93,13 +96,9 @@ useEffect(() => {
 }, []);
    
 
-useEffect(() => {
-  // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-}, [contacts]);
-
-// if(loading) {
-//   return (<div>Loading...</div>)
-// }
+// useEffect(() => {
+//  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+// }, [contacts]);
 
   return (
     <Wrapper>

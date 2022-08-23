@@ -11,7 +11,7 @@ const AddContact = ({addContactHandler,}) => {
   const add = (e) => {
     e.preventDefault();
     if (name === "" || mobile === "" || email === "") {
-      alert("ALl the fields are mandatory!");
+      alert("Please fill in all fields to continue.");
         return;
       }
 
@@ -56,7 +56,7 @@ const AddContact = ({addContactHandler,}) => {
             onChange={(e) => setEmail( e.target.value )}
           />
         </div>
-        <button className="ui button teal">Add</button>
+        <button className="ui button teal ">Add</button>
       </form>
     </div>
   );

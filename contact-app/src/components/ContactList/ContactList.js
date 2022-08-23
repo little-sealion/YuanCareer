@@ -21,11 +21,11 @@ const ContactList = (props) => {
   });
 
   return (
-    <div class="main"> 
+    <div className="main"> 
     <h2>
       Contact list
-      <Link to="/add">
-        <button class="ui button teal right  ">Add Contact</button>
+      <Link to="/add" >
+        <button className="ui button right teal ">Add Contact</button>
       </Link>
     </h2>
     <SearchBar />

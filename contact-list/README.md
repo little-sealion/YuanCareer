@@ -3,44 +3,50 @@ Step 1: Break The UI Into A Component Hierarchy
     · Header
     - "Contact List"
 
+    · Search Bar
+    - input form
+    - search the ContactItem by ContactItemContent
+    - background-color change by on-click
+
     · Add contact
     - Button with " ADD "
     - router/link to contactCard      
     
-    · Contact List
+    · ContactList
     - randering all list of ContactItems
 
-       · Search Bar
-        - input form
-        - search the ContactItem by ContactItemContent
-        - background-color change by on-click 
+            · ContactCard
+            - call ContactCard component
+            - write an add button
 
-        · Contact Card
+        · ContactItem
         - Present a contact info with delete and edit function
 
-            · Contact Content
+            · ContactItemContent
             - Present a contact name/email/mobile info
 
-            · EditContactItem
+            · ContactItemEdit
             - An edit button and link to ContactCard
+
+                · ContactCard
+                - all contact information default filled in
+                - call ContactCard component
+                - write a submit button
                 
-            · DeleteContactItem
+            · ContactItemDelete
             - a detele button and trigger the delete of ContactItem
 
 · Subpage 
-    · AddContact
+    · ContactCard
+
         · ContactContent
         - Contact Information
             · Name
             · Email
-            · mobile         
+            · mobile
+            
         · Button
-        -  write an add button
-
-   · EditContact
-        - all contact information default filled in
-        - Contact Content
-        - write a submit button
+        - import different button name
 
 
  
