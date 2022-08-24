@@ -15,7 +15,7 @@ const EditContact = ({updateContactHandler, }) => {
   const update = (e) => {
     e.preventDefault();
     if (newName === "" || newMobile === "" || newEmail === "") {
-      alert("ALl the fields are mandatory!");
+      alert("Please fill in all fields to continue.");
         return;
       }
 

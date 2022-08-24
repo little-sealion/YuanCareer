@@ -4,7 +4,6 @@ import ContactCard from './components/ContactCard/ContactCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
 const ContactList = (props) => {
-  console.log(props);
 
   const deleteContactHandler= (id) => {
      props.getContactId(id);
@@ -28,9 +27,12 @@ const ContactList = (props) => {
         <button className="ui button right teal ">Add Contact</button>
       </Link>
     </h2>
-    <SearchBar />
+    <SearchBar 
+      term={props.term} 
+      searchKeyword={props.searchKeyword} 
+     />
       <div className="ui celled list">
-          {renderContactList}
+          {renderContactList.length > 0 ? renderContactList : "no contacts available"}
         </div>
         </div>
 

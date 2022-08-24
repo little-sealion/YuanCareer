@@ -20,6 +20,7 @@ const AddContact = ({addContactHandler,}) => {
      setMobile("");
      setEmail("");
      navigate("/");
+  //    console.log(this.props.contact);
   };
   
   return (

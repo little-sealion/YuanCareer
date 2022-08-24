@@ -8,43 +8,26 @@ import AddContact from './components/AddContact/AddContact'
 import ContactList from './components/ContactList';
 import EditContact from './components/EditContact/EditContact';
 
-import styled from 'styled-components';
 import './App.css';
 
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Container = styled.div`
-  padding: 16px 32px 16px 32px;
-  border-radius: 32px;
-  overflow: auto;
-  box-shadow: 0 0 16px rgb(0 0 0 / 50%);
-  background-color: white;
-  width: 800px;
-`
-
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
+  // const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] =useState([]);
 
 //RetrieveContacts
 const retriveContacts = async() => {
-    const response = await api.get("/contacts");
-    return response.data;
-  }
+  const response = await api.get("/contacts");
+  return response.data;
+};
 
 //AddContact
 const addContactHandler = async (contact) => {
     const request= {
       id: uuid(),
       ...contact,
-    }
+    };
  
   const response = await api.post("/contacts", request)
 
@@ -54,13 +37,12 @@ const addContactHandler = async (contact) => {
 //Edit and update Contact
 const updateContactHandler = async (contact) => {
   const response = await api.put(`/contacts/${contact.id}`, contact)
-  const { id } = response.data;
 
-  console.log(response);
+  const { id } = response.data;
 
   setContacts(
     contacts.map((contact) => {
-      return contact.id !== id? {...response.data} : contact;
+      return contact.id === id ? { ...response.data } : contact;
     })
   );
 };
@@ -76,12 +58,16 @@ const removeContactHandler = async (id) => {
    setContacts(newContactList);
 }
 
+// SearchBar - search functionality
 const searchHandler = (searchTerm) => {
    setSearchTerm(searchTerm);
    if(searchTerm !== ""){
     const newContactList = contacts.filter((contact) => {
-      return 
-    })
+      return Object.values(contact).join("").toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setSearchTerm(newContactList);
+   }else{
+    setSearchTerm(contacts);
    }
 }
 
@@ -90,19 +76,30 @@ useEffect(() => {
     // if (retriveContacts) setContacts(retriveContacts);
   const getAllContacts = async () => {
     const allContacts = await retriveContacts();
-    if( allContacts ) setContacts= (allContacts);
+    if( allContacts ) setContacts(allContacts);
   }
     getAllContacts();
 }, []);
    
 
-// useEffect(() => {
+useEffect(() => {
 //  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-// }, [contacts]);
+}, [contacts]);
 
   return (
-    <Wrapper>
-      <Container>
+    <div 
+        style={{ minHeight: "100vh",
+        minWidth: "100vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center", }}>
+      <div 
+          style={{ padding:" 16px 32px 16px 32px", 
+          borderRadius: "32px",
+          overflow: "auto",
+          boxShadow: "0 0 16px rgb(0 0 0 / 50%)",
+          backgroundColor:" white",
+          width:" 800px", }}>
         <BrowserRouter>
           <Header />
           <Routes>
@@ -110,7 +107,8 @@ useEffect(() => {
                 path="/" 
                 element={
                 <ContactList 
-                  contacts={contacts} getContactId={removeContactHandler}
+                  contacts={searchTerm.length < 1 ? contacts : searchResults } 
+                  getContactId={removeContactHandler}
                   term={searchTerm}
                   searchKeyword = {searchHandler}
                 />
@@ -129,8 +127,8 @@ useEffect(() => {
 
           </Routes>
         </BrowserRouter>
-      </Container>
-    </Wrapper>
+      </div>
+    </div>
   );
 }
 
