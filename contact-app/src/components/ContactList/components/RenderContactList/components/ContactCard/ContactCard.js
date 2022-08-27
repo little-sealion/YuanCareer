@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useContactsCrud } from '../../../../context/ContactsCrudContext';
-import user from '../../../../images/user.png';
+import { useContactsCrud } from '../../../../../../context/ContactsCrudContext';
+import user from '../../../../../../images/user.png';
 
 const ContactCard = (props) => { 
   const {id, name, mobile, email} = props.contact;

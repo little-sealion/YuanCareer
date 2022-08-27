@@ -1,20 +1,8 @@
 {
   "contacts": [
     {
-      "id": "73cc88a7-bedb-416e-9a7b-de0e7efb133d",
-      "name": "Lily",
-      "mobile": "0452235235",
-      "email": "lily@gmail.com"
-    },
-    {
-      "id": "4b2faefe-88d6-4075-a492-236699b9ee52",
-      "name": "Tai",
-      "mobile": "0453625325",
-      "email": "tai@gmail.com"
-    },
-    {
       "id": "160569ff-f21d-435b-a321-4157eafc4e12",
-      "name": "Billy",
+      "name": "Billy1",
       "mobile": "0532653524",
       "email": "billy@gmail.com"
     },
@@ -35,6 +23,12 @@
       "name": "Billy",
       "mobile": "0452235000",
       "email": "billy@gmail.com"
+    },
+    {
+      "id": "7001d8ff-be47-4ac7-a0af-dffdbf3e2357",
+      "name": "Nicole",
+      "mobile": "0532653524",
+      "email": "nicole@gmail.com"
     }
   ]
 }

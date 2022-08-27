@@ -1,7 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import {useNavigate} from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContactsCrud } from "../../context/ContactsCrudContext";
 
 const EditContact = () => {
@@ -19,9 +17,9 @@ const EditContact = () => {
     if (newName === "" || newMobile === "" || newEmail === "") {
       alert("Please fill in all fields to continue.");
         return;
-      }
+      };
 
-     updateContactHandler({id, newName, newMobile, newEmail});
+     updateContactHandler({id, name: newName, mobile: newMobile, email: newEmail});
      setNewName("");
      setNewMobile("");
      setNewEmail("");

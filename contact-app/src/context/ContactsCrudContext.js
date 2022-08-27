@@ -61,9 +61,9 @@ const searchHandler = (searchTerm) => {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
    });
-   setSearchTerm(newContactList);
+   setSearchResults(newContactList);
   }else{
-   setSearchTerm(contacts);
+   setSearchResults(contacts);
   }
 };
 
