@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useContactsCrud } from '../../context/ContactsCrudContext';
 import ContactCard from './components/ContactCard/ContactCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
 const ContactList = (props) => {
+  const {contacts, retriveContacts, } = useContactsCrud();
+  const {searchTerm, searchResults} = SearchBar();
 
-  const deleteContactHandler= (id) => {
-     props.getContactId(id);
-  }
+  useEffect(() => {
+    retriveContacts();
+  },[]);
 
-  const renderContactList = props.contacts.map((contact) => {
+  const renderContactList = (searchTerm.length < 1 ? contacts: searchResults).map((contact) => {
      return ( 
      <ContactCard 
         contact={contact} 
-        clickHandler={deleteContactHandler} 
         key={contact.id}
         />
       );
@@ -27,10 +29,7 @@ const ContactList = (props) => {
         <button className="ui button right teal ">Add Contact</button>
       </Link>
     </h2>
-    <SearchBar 
-      term={props.term} 
-      searchKeyword={props.searchKeyword} 
-     />
+    <SearchBar />
       <div className="ui celled list">
           {renderContactList.length > 0 ? renderContactList : "no contacts available"}
         </div>

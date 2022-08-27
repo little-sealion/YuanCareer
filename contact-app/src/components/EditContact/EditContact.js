@@ -2,15 +2,17 @@ import React from "react";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useContactsCrud } from "../../context/ContactsCrudContext";
 
-const EditContact = ({updateContactHandler, }) => {
+const EditContact = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const {id, name, mobile, email} =location.state.contact;
 
   const[newName, setNewName] =useState(name);
   const[newMobile, setNewMobile] = useState(mobile);
   const[newEmail, setNewEmail] = useState(email);
-  const navigate = useNavigate();
+  const {updateContactHandler} = useContactsCrud();
 
   const update = (e) => {
     e.preventDefault();

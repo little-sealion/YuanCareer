@@ -1,27 +1,38 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useContactsCrud } from '../../../../context/ContactsCrudContext';
 import user from '../../../../images/user.png';
 
-const ContactCard = (props) => {
+const ContactCard = (props) => { 
+  const {id, name, mobile, email} = props.contact;
+  const { removeContactHandler } = useContactsCrud();
 
- const {id, name, mobile, email} = props.contact;
+  const deleteContact = (id) => {
+    removeContactHandler(id);
+  }
 
   return (
     <div className="item">
       <img className="ui avatar image" src={user} alt="user"/>
-        <div className="content">
+        <div className="content"> 
+        <Link
+          to = {`/contact/${id}`}
+          state={{contact: props.contact}} 
+        >
           <div className="header"> {name}</div>
           <div>{mobile}</div>
           <div>{email}</div>
+          </Link>
+
         </div>
         <i 
           className="trash alternate outline icon " 
           style={{ color:"red", float: "right", marginTop:"7px", marginLeft: "10px"}}
-          onClick={() => props.clickHandler(id)}
+          onClick={() => deleteContact(id)}
         >
         </i>
          <Link 
-           to={"/edit"}
+           to={`/edit`}
            state= {{ contact: props.contact }} >
               <i 
                 className="edit alternate outline icon"

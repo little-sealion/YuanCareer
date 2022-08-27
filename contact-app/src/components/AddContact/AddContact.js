@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { useContactsCrud } from "../../context/ContactsCrudContext";
 
-const AddContact = ({addContactHandler,}) => {
+const AddContact = () => {
   const[name, setName] =useState("");
   const[mobile, setMobile] = useState("");
   const[email, setEmail] = useState("");
+  const {addContactHandler} = useContactsCrud();
   const navigate = useNavigate();
 
   const add = (e) => {
