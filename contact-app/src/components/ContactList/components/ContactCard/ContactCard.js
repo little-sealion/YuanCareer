@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useContactsCrud } from '../../../../../../context/ContactsCrudContext';
-import user from '../../../../../../images/user.png';
+import { useContactsCrud } from '../../../../context/ContactsCrudContext'
+import user from '../../../../images/user.png';
 
 const ContactCard = (props) => { 
   const {id, name, mobile, email} = props.contact;
@@ -15,14 +15,14 @@ const ContactCard = (props) => {
     <div className="item">
       <img className="ui avatar image" src={user} alt="user"/>
         <div className="content"> 
-        <Link
+        {/* <Link
           to = {`/contact/${id}`}
           state={{contact: props.contact}} 
-        >
+        > */}
           <div className="header"> {name}</div>
           <div>{mobile}</div>
           <div>{email}</div>
-          </Link>
+          {/* </Link> */}
 
         </div>
         <i 

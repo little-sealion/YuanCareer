@@ -57,7 +57,7 @@ const searchHandler = (searchTerm) => {
   if(searchTerm !== ""){
    const newContactList = contacts.filter((contact) => {
      return Object.values(contact)
-      .join("")
+      .join(" ")
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
    });

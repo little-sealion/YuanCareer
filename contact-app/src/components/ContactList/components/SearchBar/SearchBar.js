@@ -9,7 +9,7 @@ const SearchBar = () => {
   const {searchTerm, searchHandler} = useContactsCrud();
 
   const onUserSearch = (e) => {
-    searchHandler(e.target.value);
+   searchHandler(e.target.value);
   }
 
   return (
@@ -17,12 +17,14 @@ const SearchBar = () => {
     <div className="ui icon input">
       <input 
         type="text" 
-        placeholder="Search contacts"/>
+        placeholder="Search contacts"
+        className="prompt"
+        value={searchTerm}
+        onChange={(e) => onUserSearch(e)}
+          />
       <i 
         aria-hidden="true" 
         className="search circular link icon"
-        value={searchTerm}
-        onChange={(e) => onUserSearch(e)}
         >  
       </i>
     </div>

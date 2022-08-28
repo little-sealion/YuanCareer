@@ -2,14 +2,23 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useContactsCrud } from '../../context/ContactsCrudContext';
 import SearchBar from './components/SearchBar/SearchBar';
-import RenderContactList from './components/RenderContactList/RenderContactList';
+import ContactCard from './components/ContactCard/ContactCard';
 
 const ContactList = () => {
-  const {retriveContacts } = useContactsCrud();
+  const {retriveContacts,searchTerm, contacts, searchResults } = useContactsCrud();
 
   useEffect(() => {
     retriveContacts();
   },[]);
+
+  const renderContactList = (searchTerm.length < 1 ? contacts : searchResults).map((contact) => {
+    return (
+      <ContactCard
+        contact={contact}
+        key={contact.id}
+      />
+    );
+  });
 
   return (
     <div className="main"> 
@@ -20,7 +29,11 @@ const ContactList = () => {
       </Link>
     </h2>
     <SearchBar />
-    <RenderContactList />
+    <div className="ui celled list">
+        {renderContactList.length > 0
+          ? renderContactList
+          : "No Contacts available"}
+      </div>
     </div>
   );
 };
