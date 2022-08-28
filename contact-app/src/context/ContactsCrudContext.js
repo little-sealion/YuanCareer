@@ -13,6 +13,7 @@ export function ContactsCrudContextProvider({children}) {
 //RetrieveContacts
 const retriveContacts = async() => {
   const response = await api.get("/contacts");
+  console.log(response);
   if(response.data) setContacts(response.data);
 };
 
