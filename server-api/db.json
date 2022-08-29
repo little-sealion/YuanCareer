@@ -2,7 +2,7 @@
   "contacts": [
     {
       "id": "aec41d61-96a9-4f82-834b-efd4bab3feb0",
-      "name": "Billy",
+      "name": "Billi",
       "mobile": "0452235000",
       "email": "billy@gmail.com"
     },
@@ -29,6 +29,12 @@
       "name": "Jean",
       "mobile": "0532653263",
       "email": "jean@gmail.com"
+    },
+    {
+      "id": "6aea671c-c659-488d-be7c-daa097127ccc",
+      "name": "Alex",
+      "mobile": "0452235235",
+      "email": "alex@gmail.com"
     }
   ]
 }

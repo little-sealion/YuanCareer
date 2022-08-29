@@ -11,10 +11,11 @@ export function ContactsCrudContextProvider({children}) {
    const [searchResults, setSearchResults] =useState([]);
 
 //RetrieveContacts
-const retriveContacts = async() => {
+const retrieveContacts = async () => {
   const response = await api.get("/contacts");
-  console.log(response);
-  if(response.data) setContacts(response.data);
+  if (response.data) {
+    setContacts(response.data);
+  } 
 };
 
 //AddContact
@@ -73,7 +74,7 @@ const searchHandler = (searchTerm) => {
         searchTerm,
         searchResults,
         searchHandler,
-        retriveContacts,
+        retrieveContacts,
         addContactHandler,
         updateContactHandler,
         removeContactHandler,

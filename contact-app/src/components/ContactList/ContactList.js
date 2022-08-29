@@ -5,11 +5,11 @@ import SearchBar from './components/SearchBar/SearchBar';
 import ContactCard from './components/ContactCard/ContactCard';
 
 const ContactList = () => {
-  const {retriveContacts,searchTerm, contacts, searchResults } = useContactsCrud();
+  const {retrieveContacts, searchTerm, contacts, searchResults } = useContactsCrud();
 
   useEffect(() => {
-    retriveContacts();
-  },[]);
+    retrieveContacts();
+  }, []);
 
   const renderContactList = (searchTerm.length < 1 ? contacts : searchResults).map((contact) => {
     return (
