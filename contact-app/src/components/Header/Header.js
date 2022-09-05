@@ -16,7 +16,7 @@ const Header = () => {
   return (
    <Wrapper>
         <h1>
-        <ContactHeader >Contact Manage</ContactHeader>
+        <ContactHeader >Draw Material Manage</ContactHeader>
         </h1>
     </Wrapper>
   );
