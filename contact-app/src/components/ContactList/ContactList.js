@@ -11,11 +11,11 @@ const ContactList = () => {
     retrieveContacts();
   }, []);
 
-  const renderContactList = (searchTerm.length < 1 ? contacts : searchResults).map((contact) => {
+  const renderContactList = (searchTerm.length < 1 ? contacts: searchResults).map((contact) => {
     return (
       <ContactCard
-        contact={contact}
-        key={contact.id}
+        contact={contact[1]}
+        key={contact[0]}
       />
     );
   });

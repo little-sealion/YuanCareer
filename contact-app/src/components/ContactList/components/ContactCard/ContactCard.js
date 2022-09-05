@@ -4,7 +4,7 @@ import { useContactsCrud } from '../../../../context/ContactsCrudContext'
 import user from '../../../../images/user.png';
 
 const ContactCard = (props) => { 
-  const {id, name, mobile, email} = props.contact;
+  const {name, mobile, email} = props.contact;
   const { removeContactHandler } = useContactsCrud();
 
   const deleteContact = (id) => {
@@ -28,7 +28,7 @@ const ContactCard = (props) => {
         <i 
           className="trash alternate outline icon " 
           style={{ color:"red", float: "right", marginTop:"7px", marginLeft: "10px"}}
-          onClick={() => deleteContact(id)}
+          onClick={() => deleteContact(props.key)}
         >
         </i>
          <Link 

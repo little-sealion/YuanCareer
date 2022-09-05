@@ -12,9 +12,9 @@ export function ContactsCrudContextProvider({children}) {
 
 //RetrieveContacts
 const retrieveContacts = async () => {
-  const response = await api.get("/contacts");
+  const response = await api.get("/contacts.json");
   if (response.data) {
-    setContacts(response.data);
+    setContacts(Object.entries(response.data));
   } 
 };
 
@@ -25,25 +25,28 @@ const addContactHandler = async (contact) => {
     ...contact,
   };
 
-const response = await api.post("/contacts", request)
+const response = await api.post("/contacts.json", request)
 
 setContacts([...contacts, response.data]);
 };
 
 //Edit and update Contact
 const updateContactHandler = async (contact) => {
-  const response = await api.put(`/contacts/${contact.id}`, contact)
+  console.log(contact[0]);
+  const response = await api.put(`/contacts/${contact[0]}.json`, contact)
   const { id } = response.data;
+  let key = contact[0];
+  let updatedContact =  [key,{ ...response.data }]
   setContacts(
     contacts.map((contact) => {
-      return contact.id === id ? { ...response.data } : contact;
+      return contact[1].id === id ?  updatedContact: contact;
     })
   );
 };
 
 //DeleteContact
 const removeContactHandler = async (id) => {
-  await api.delete(`/contacts/${id}`);
+  await api.delete(`/contacts/${id}.json`);
 
    const newContactList = contacts.filter((contact) => {
     return contact.id !== id;
