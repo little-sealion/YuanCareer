@@ -1,9 +1,6 @@
 import React from 'react';
-import { useItemsCrud } from '../../../context/ItemsCrudContext';
+import { useItemsCrud } from '../context/ItemsCrudContext';
 
-// - input form
-// - search the ContactItem by ContactItemContent
-// - background-color change by on-click
 
 const SearchBar = () => {
   const { searchTerm, searchHandler } = useItemsCrud();

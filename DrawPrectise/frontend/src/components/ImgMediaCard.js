@@ -10,7 +10,8 @@ import Grid from '@mui/material/Grid';
 
 export default function ImgMediaCard(props) {
   const { Title, Category, Detail, Count, ImageUrl } = props.item;
-
+  let details = Object.values(JSON.parse(Detail));
+  // console.log(details.filter(detail => detail.imgName === ImageUrl));
   return (
     <Grid item xs={4}>
       <Card sx={{ maxWidth: 345 }}>
@@ -18,7 +19,7 @@ export default function ImgMediaCard(props) {
           component="img"
           alt={ImageUrl}
           height="140"
-          image={require(`../../../uploads/${ImageUrl}`)}
+          image={require(`../uploads/${Title}/${ImageUrl}`)}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -28,7 +29,7 @@ export default function ImgMediaCard(props) {
             Category:{Category}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {Detail}
+            {details.filter(detail => detail.imgName === ImageUrl).imgDetail}
           </Typography>
         </CardContent>
         <CardActions>

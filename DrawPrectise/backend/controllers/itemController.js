@@ -9,7 +9,14 @@ const router = express.Router();
 const itemModel = require('../models/itemModel');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `../frontend/src/uploads/${title}`);
+    let path = `../frontend/src/uploads/${req.body.title}`;
+    fs.mkdir(path, (err) => {
+      if (err) {
+          return console.error(err);
+      }
+      console.log('Directory created successfully!');
+  });
+    cb(null, path);
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -50,19 +57,19 @@ router.get('/items/:id', (req, res) => {
 });
 
 // Define an /api/items/create endpoint that insert a new book into database
-router.post('/items/create', upload.single('coverImagePath'), (req, res) => {
+router.post('/items/create', upload.any('files'), (req, res) => {
   // extract post book form data from req.body
   const item = req.body;
   console.log(JSON.stringify(item));
-  console.log(req.file);
+  console.log(req.files);
 
   // sanitise the input fields
   itemModel
     .createItem(
       validator.escape(item.title),
       validator.escape(item.category),
-      validator.escape(item.detail),
-      req.file.originalname,
+      item.detail,
+      req.files[0].originalname,
       0
     )
     .then((result) => {

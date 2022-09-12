@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useItemsCrud } from '../../context/ItemsCrudContext';
-import SearchBar from './components/SearchBar';
-import ImgMediaCard from './components/ImgMediaCard';
+import { useItemsCrud } from '../context/ItemsCrudContext';
+import SearchBar from './SearchBar';
+import ImgMediaCard from './ImgMediaCard';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-const ContactList = () => {
+const ItemList = () => {
   const { retrieveItems, searchTerm, items, searchResults } = useItemsCrud();
 
   useEffect(() => {
     retrieveItems();
-  }, []);
+  }, [retrieveItems]);
 
-  const renderContactList = (searchTerm.length < 1 ? items : searchResults)
+  const renderItemList = (searchTerm.length < 1 ? items : searchResults)
     .sort(function (a, b) {
       return a.Count - b.Count;
     })
@@ -37,10 +37,10 @@ const ContactList = () => {
         </Link>
       </Box>
 
-      <div className="ui celled list">
-        {renderContactList.length > 0 ? (
-          <Grid sx={{ flexGrow: 1 }} container spacing={5}>
-            {renderContactList}
+      <div >
+        {renderItemList.length > 0 ? (
+          <Grid  container spacing={2}>
+            {renderItemList}
           </Grid>
         ) : (
           'No Items available'
@@ -50,4 +50,4 @@ const ContactList = () => {
   );
 };
 
-export default ContactList;
+export default ItemList;
