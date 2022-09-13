@@ -48,10 +48,9 @@ const EditItem = () => {
     setCount(count + 1);
   };
 
-  console.log("details",details);
-  console.log("addedDetails",addedDetails)
+
   const sumUpDetails = [...details,...addedDetails];
-console.log("totalDetails",sumUpDetails)
+
 
 
   const update = async (e) => {
@@ -148,7 +147,7 @@ console.log("totalDetails",sumUpDetails)
         +1
       </Button>
 
-      <Grid sx={{ flexGrow: 1 }} container spacing={5} margin={5}>
+      <Grid sx={{ flexGrow: 1,minHeight:"400px" }} container spacing={5} margin={5}  border={"dashed"}>
       {       
        details.map(detail => 
 

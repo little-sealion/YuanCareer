@@ -74,7 +74,7 @@ router.post('/items/create', upload.any('files'), (req, res) => {
       validator.escape(item.title),
       validator.escape(item.category),
       item.detail,
-      req.files[0].originalname,
+      req.files[0]?.originalname??"",
       0
     )
     .then((result) => {

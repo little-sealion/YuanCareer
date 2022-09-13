@@ -30,11 +30,20 @@ const AddItem = () => {
  
   const onImageChange = e => {
     setImages([...e.target.files]);
+    let newDetails = [];
+    for (let i = 0, numFiles = e.target.files.length; i < numFiles; i++) {
+      const file = e.target.files[i];
+      newDetails.push({imgName: file.name, imgDetail:""})
+    }
+    setDetails([...newDetails])
   }
   const onAddImages = files => {
     setImages([...images,...files]);
-    files.foreach(file => console.log(file.name))
-    let newDetails = files.map(file => ({imgName: file.name, imgDetail:""}))
+    let newDetails = [];
+    for (let i = 0, numFiles = files.length; i < numFiles; i++) {
+      const file = files[i];
+      newDetails.push({imgName: file.name, imgDetail:""})
+    }
     setDetails([...details,...newDetails])
   }
   const deleteImage = srcImg => {
@@ -57,26 +66,27 @@ const AddItem = () => {
     }
   }
   
-  const add = (e) => {
+  const add = async (e) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("title",title);
     formData.append("category",category);
     formData.append("detail",JSON.stringify(details));
     images.forEach(img => formData.append("files",img)); 
-    addItemHandler(formData);
+    await addItemHandler(formData);
     setTitle('');
     setCategory('');
     navigate('/');
   };
 
   useEffect(() => {
-    if(images.length < 1) return;
+    // if(images.length < 1) return;
     const newImageUrls = [];
     images.forEach(image => newImageUrls.push(image.name+"@"+URL.createObjectURL(image)));
     setImageURLs(newImageUrls);
   }, [images]);
   
+  console.log("details",details)
 
   return (
     <Box
@@ -105,6 +115,7 @@ const AddItem = () => {
           name="category"
           value={category}
           label="Category"
+          required
           onChange={(e) => setCategory(e.target.value)}
         >
           {categories.map((catg) => (
@@ -122,12 +133,12 @@ const AddItem = () => {
         onChange={onImageChange}
       />}
 
-      <Grid sx={{ flexGrow: 1 }} container spacing={5} margin={5}>
+      <Grid sx={{ flexGrow: 1,minHeight:"400px" }} container spacing={5} margin={5} border={"dashed"}>
       {       
        imageURLs.map(srcImg => 
         <Grid item>
           <Button onClick={() => deleteImage(srcImg.substring(0,srcImg.indexOf('@')))}><HighlightOffIcon color='warning' fontSize='large'/></Button>
-          
+          {console.log("srcImg",srcImg)}
         <Card sx={{ maxWidth: 345 }}>
        <CardActionArea>
          <CardMedia

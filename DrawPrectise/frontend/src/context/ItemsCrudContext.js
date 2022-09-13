@@ -38,7 +38,6 @@ export function ItemsCrudContextProvider({ children }) {
     const newItemList = items.filter((item) => {
       return item.id !== id;
     });
-
     setItems(newItemList);
   };
 
