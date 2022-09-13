@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import SearchAppBar from './components/AppBar';
 import AddItem from './components/AddItem';
 import ItemList from './components/ItemList';
 import EditItem from './components/EditItem';
@@ -19,8 +19,8 @@ function App() {
         }}
       >
         <Router>
-          <Header />
           <ItemsCrudContextProvider>
+          <SearchAppBar />
             <Routes>
               <Route path="/" element={<ItemList />} />
               <Route path="/add" element={<AddItem />} />

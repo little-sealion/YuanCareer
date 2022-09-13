@@ -31,8 +31,11 @@ const AddItem = () => {
   const onImageChange = e => {
     setImages([...e.target.files]);
   }
-  const onAddImages = e => {
-    setImages([...images,...e.target.files]);
+  const onAddImages = files => {
+    setImages([...images,...files]);
+    files.foreach(file => console.log(file.name))
+    let newDetails = files.map(file => ({imgName: file.name, imgDetail:""}))
+    setDetails([...details,...newDetails])
   }
   const deleteImage = srcImg => {
     setImages(images.filter(image => image.name !== srcImg));
@@ -90,6 +93,7 @@ const AddItem = () => {
         name="title"
         variant="filled"
         margin="dense"
+        value={title}
         required
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -157,7 +161,7 @@ const AddItem = () => {
     multiple
     type="file"
     accept="image/*"
-    onChange={onAddImages}
+    onChange={e => onAddImages(e.target.files)}
   />
   <label htmlFor="contained-button-file">
     <Button variant="contained" color="primary" component="span" startIcon={<ImageIcon />}>

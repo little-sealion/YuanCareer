@@ -82,12 +82,41 @@ router.post('/items/create', upload.any('files'), (req, res) => {
     });
 });
 
+// Define an /api/items/create endpoint that insert a new book into database
+router.post('/items/update', upload.any('files'), (req, res) => {
+  // extract post book form data from req.body
+  const item = req.body;
+  console.log(JSON.stringify(item));
+  console.log(req.files);
+
+  const coverImageUrl = item.detail
+  // sanitise the input fields
+  itemModel
+    .updateItem(
+      validator.escape(item.id),
+      validator.escape(item.title),
+      validator.escape(item.category),
+      item.detail,
+      item.imageUrl,
+      item.count
+    )
+    .then((result) => {
+      res.status(200).json('item created with id' + result.insertId);
+    })
+    // if there's an error, error code 500 and message will be returned
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json('query error - failed to create item');
+    });
+});
+
+
 // Define an /api/items/update endpoint that updates an existing book
-router.post('/items/update', async (req, res) => {
+router.post('/items/updateCount', async (req, res) => {
   const updateInfo = req.body;
   // sanitise inputs before insert into database
   itemModel
-    .updateItem(updateInfo.id, updateInfo.count)
+    .updateItemCount(updateInfo.id, updateInfo.count)
     .then((result) => {
       if (result.affectedRows > 0) {
         res.status(200).json('item updated');

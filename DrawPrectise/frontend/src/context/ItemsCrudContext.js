@@ -21,9 +21,14 @@ export function ItemsCrudContextProvider({ children }) {
     await api.post('api/items/create', formData);
   };
 
-  //Edit and update Item
+  //Update Item
   const updateItemHandler = async (updateInfo) => {
-    await api.post(`api/items/update`, updateInfo);
+    await api.post('api/items/update', updateInfo);
+  };
+
+  //Edit and update Item Count
+  const updateItemCountHandler = async (updateCountInfo) => {
+    await api.post(`api/items/updateCount`, updateCountInfo);
   };
 
   //Delete Item
@@ -60,6 +65,7 @@ export function ItemsCrudContextProvider({ children }) {
     searchHandler,
     retrieveItems,
     addItemHandler,
+    updateItemCountHandler,
     updateItemHandler,
     removeItemHandler,
   };

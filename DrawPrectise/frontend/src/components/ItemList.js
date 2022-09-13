@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useItemsCrud } from '../context/ItemsCrudContext';
-import SearchBar from './SearchBar';
 import ImgMediaCard from './ImgMediaCard';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 const ItemList = () => {
   const { retrieveItems, searchTerm, items, searchResults } = useItemsCrud();
 
   useEffect(() => {
     retrieveItems();
-  }, [retrieveItems]);
+  }, []);
 
   const renderItemList = (searchTerm.length < 1 ? items : searchResults)
     .sort(function (a, b) {
@@ -25,26 +25,27 @@ const ItemList = () => {
 
   return (
     <div className="main">
-      <Box
+
+
+      <div >
+        {renderItemList.length > 0 ? (
+          <Grid  container spacing={2} margin={2}>
+            {renderItemList}
+            <Box
         m={1}
         display="flex"
         justifyContent="space-between"
         alignItems="flex-end"
       >
-        <SearchBar />
         <Link to="/add">
-          <Button variant="contained">Add Item</Button>
+          <Button variant="contained"><AddIcon /></Button>
         </Link>
       </Box>
-
-      <div >
-        {renderItemList.length > 0 ? (
-          <Grid  container spacing={2}>
-            {renderItemList}
           </Grid>
         ) : (
           'No Items available'
         )}
+             
       </div>
     </div>
   );
