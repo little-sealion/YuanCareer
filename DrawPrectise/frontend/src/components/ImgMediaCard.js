@@ -13,8 +13,8 @@ export default function ImgMediaCard(props) {
   let details = Object.values(JSON.parse(Detail));
   // console.log(details.filter(detail => detail.imgName === ImageUrl));
   return (
-    <Grid item xs={4}>
-      <Card sx={{ maxWidth: 345 }}>
+    <Grid item >
+      <Card sx={{ minWidth: 345 }}>
       {ImageUrl !== "" && <CardMedia
           component="img"
           alt={ImageUrl}
