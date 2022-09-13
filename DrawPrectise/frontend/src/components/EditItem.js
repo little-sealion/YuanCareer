@@ -13,7 +13,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
-import { Alert, CardActionArea } from '@mui/material';
+import { Alert, CardActionArea, stepClasses } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useNavigate } from 'react-router-dom';
@@ -98,7 +98,6 @@ const EditItem = () => {
     }
 
     useEffect(() => {
-      // if(images.length < 1) return;
       const newImageUrls = [];
       images.forEach(image => newImageUrls.push(image.name+"@"+URL.createObjectURL(image)));
       setImageURLs(newImageUrls);
@@ -154,15 +153,31 @@ const EditItem = () => {
         <Grid item key={detail.imgName}>
           <Button onClick={() => deleteExistingImage(detail.imgName)}><HighlightOffIcon color='warning' fontSize='large'/></Button>
           
-        <Card sx={{ maxWidth: 345 }}  >
-       <CardActionArea>
-         <CardMedia
+        <Card sx={{ '&:hover': {
+          "& .enlarge": {
+            objectFit:'contain',
+            boxShadow: 20, 
+            width:"1400px",
+            height:"1000px",
+            position:'fixed',
+            top:"10px",
+            left:"5%",
+            zIndex:10     
+          }  
+          }}
+          } >
+       <CardActionArea >
+
+       <CardMedia          
+           className='enlarge'
            component="img"
            height="200"
            width="200"
            image={require(`../uploads/${Title}/${detail.imgName}`)}
            alt={title}
          />
+
+         
          <CardContent>
          <TextField
          fullWidth
@@ -185,12 +200,25 @@ const EditItem = () => {
         <Grid item >
           <Button onClick={() => deleteImage(srcImg.substring(0,srcImg.indexOf('@')))}><HighlightOffIcon color='warning' fontSize='large'/></Button>
           
-        <Card>
+        <Card sx={{ '&:hover': {
+          "& .enlarge": {
+            objectFit:'contain',
+            boxShadow: 20, 
+            width:"1400px",
+            height:"1000px",
+            position:'fixed',
+            top:"10px",
+            left:"5%",
+            zIndex:5      
+          }  
+          }}
+          }>
        <CardActionArea>
          <CardMedia
+           className='enlarge'
            component="img"
-           height="140"
-           width="140"
+           height="200"
+           width="200"
            image={srcImg.substring(srcImg.indexOf('@') + 1)}
            alt={title}
          />

@@ -34,7 +34,7 @@ const ItemList = () => {
             <Box
         m={1}
         display="flex"
-        justifyContent="space-between"
+        justifyContent="flex-start"
         alignItems="flex-end"
       >
         <Link to="/add">
