@@ -15,12 +15,12 @@ export default function ImgMediaCard(props) {
   return (
     <Grid item xs={4}>
       <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
+      {ImageUrl !== "" && <CardMedia
           component="img"
           alt={ImageUrl}
-          height="140"
+          height="200"
           image={require(`../uploads/${Title}/${ImageUrl}`)}
-        />
+        />}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {Title}

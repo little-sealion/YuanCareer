@@ -54,7 +54,7 @@ const EditItem = () => {
 console.log("totalDetails",sumUpDetails)
 
 
-  const update =  (e) => {
+  const update = async (e) => {
 
     e.preventDefault();
     let formData = new FormData();
@@ -63,11 +63,11 @@ console.log("totalDetails",sumUpDetails)
     formData.append("id",Id);
     formData.append("title",title);
     formData.append("category",category);
-    formData.append("imageUrl",sumUpDetails[0].imgName)
+    formData.append("imageUrl",sumUpDetails[0]?.imgName??"")
     formData.append("detail",JSON.stringify(sumUpDetails));
     formData.append("count",count);
     images.forEach(img => formData.append("files",img)); 
-     updateItemHandler(formData);
+    await updateItemHandler(formData);
 
     setTitle('');
     setCategory('');

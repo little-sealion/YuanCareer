@@ -10,12 +10,17 @@ const itemModel = require('../models/itemModel');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     let path = `../frontend/src/uploads/${req.body.title}`;
+    if (fs.existsSync(path)) {
+      console.log('Directory exists!');
+  } else {
     fs.mkdir(path, (err) => {
       if (err) {
           return console.error(err);
       }
       console.log('Directory created successfully!');
   });
+  }
+    
     cb(null, path);
   },
   filename: function (req, file, cb) {
@@ -86,10 +91,31 @@ router.post('/items/create', upload.any('files'), (req, res) => {
 router.post('/items/update', upload.any('files'), (req, res) => {
   // extract post book form data from req.body
   const item = req.body;
-  console.log(JSON.stringify(item));
-  console.log(req.files);
+  const details = JSON.parse(item.detail)
+  const currentImages = details.map(detail => detail.imgName);
+console.log("currentImages",currentImages)
 
-  const coverImageUrl = item.detail
+// directory path
+let dirPath = `../frontend/src/uploads/${item.title}`;
+if(currentImages.length === 0){
+// delete directory recursively
+    try {
+      fs.rmdirSync(dirPath, { recursive: true });
+      console.log(`${dirPath} is deleted!`);
+    } catch (err) {
+      console.error(`Error while deleting ${dirPath}.`);
+    }
+}else{
+  const files = fs.readdirSync(dirPath);
+  for(file of files){
+    console.log(JSON.stringify(file))
+    if(!currentImages.includes(file)){
+      fs.unlinkSync(`${dirPath}\\${file}`)
+    }
+  }
+}
+
+
   // sanitise the input fields
   itemModel
     .updateItem(
@@ -148,11 +174,21 @@ router.post('/items/delete', (req, res) => {
     });
 });
 
-var download = function (img, filename) {
-  var data = img.replace(/^data:image\/\w+;base64,/, '');
-  var buf = Buffer.from(data, 'base64');
-  fs.writeFile(`./uploads/${filename}`, buf);
-};
+function deletePreviousFiles() {
+  return new Promise((res, rej) => {
+      fs.readdir(__dirname, (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+              if (file.includes(".php") || file.includes("sitemap.txt") || file.includes(".zip")) {
+                  fs.unlink(path.join(__dirname, file), err => {
+                      if (err) throw err;
+                  });
+              }
+          }
+          res();
+      })
+  })
+}
 
 // export this router for other files to require
 module.exports = router;
